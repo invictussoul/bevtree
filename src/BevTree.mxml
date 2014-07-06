@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="1000" minHeight="1000"
+			   addedToStage="application1_addedToStageHandler(event)"
+			   enterFrame="updateState(event)">
+	<fx:Declarations>
+		<!-- Pace non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import testCase.behaviortree;
+			
+			[Bindable]
+			private var _bev:behaviortree;
+			[Bindable]
+			private var _curState:String ="out put state";
+			protected function application1_addedToStageHandler(event:Event):void
+			{
+				_bev = new behaviortree();
+				content.addChild(_bev);
+			}
+			
+			protected function updateState(event:Event):void
+			{
+				if(_bev)
+				{
+					_curState = _bev.test.curState;	
+				}
+			
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<mx:UIComponent id="content" width="900" left="100" height="100%" />
+	<mx:Text id="state" text="{_curState}" left="20" top="20"/>
+</s:Application>
